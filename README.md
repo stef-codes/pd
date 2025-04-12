@@ -1,54 +1,105 @@
-# React + TypeScript + Vite
+# Procrastination Detector
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A productivity app that helps you break down tasks and overcome procrastination using AI-powered analysis (via Cerebras Inference API) and a built-in Pomodoro timer.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **AI-Powered Task Analysis (Cerebras Inference API)**
+  - Identifies procrastination patterns
+  - Suggests specific subtasks
+  - Provides motivational messages
+  - Generates detailed action plans
+  - Uses advanced language understanding for personalized task analysis
 
-## Expanding the ESLint configuration
+- **Smart Task Management**
+  - Create and track tasks
+  - Break down tasks into subtasks
+  - Filter tasks by status (Active/Completed/All)
+  - View task analysis and progress
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Pomodoro Timer**
+  - 25-minute focus sessions
+  - 5-minute short breaks
+  - 15-minute long breaks
+  - Automatic session transitions
+  - Visual progress indicator
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Getting Started
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Prerequisites
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Node.js (version 14 or higher)
+- npm or yarn
+- A Hugging Face API key (for Cerebras Inference API access)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/procrastination-detector.git
+   cd procrastination-detector
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Create a `.env` file in the root directory and add your Hugging Face API key:
+   ```
+   VITE_HUGGING_FACE_API_KEY=your_api_key_here
+   ```
+
+### Running the App
+
+1. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+2. Open your browser and navigate to `http://localhost:5173`
+
+## How to Use
+
+### Creating Tasks
+1. Enter a task title and description
+2. Click "Add Task" to create a new task
+3. The Cerebras AI will automatically analyze the task and provide:
+   - Procrastination level assessment
+   - Suggested subtasks
+   - Motivational message
+   - Detailed analysis of task challenges
+   - Personalized action plan
+
+### Using the Pomodoro Timer
+1. Click "Start" to begin a focus session
+2. Work on your task for 25 minutes
+3. Take a 5-minute break when the timer ends
+4. After 3 focus sessions, take a 15-minute break
+5. Use the "Reset" button to start over
+
+### Managing Tasks
+- Click the expand button to view task details
+- Check off subtasks as you complete them
+- Use the tabs to filter tasks by status
+- Click "Generate Outline" to get a detailed action plan from the AI
+
+## Technologies Used
+
+- React
+- TypeScript
+- Material-UI
+- Hugging Face Cerebras Inference API
+- Vite
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
