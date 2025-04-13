@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Task, Subtask, ProcrastinationAnalysis, AITaskAnalysis } from '../types';
+import { Task, Subtask, AITaskAnalysis } from '../types';
 import { differenceInDays } from 'date-fns';
 import { analyzeTask } from '../services/aiService';
 

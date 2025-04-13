@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTasks } from '../contexts/TaskContext';
-import { Task } from '../types';
+import { Task, AITaskAnalysis } from '../types';
 import {
   Card,
   CardContent,
@@ -179,7 +179,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
                           Steps to Completion
                         </Typography>
                         <Box component="ol" sx={{ pl: 2 }}>
-                          {analysis.suggestedOutline.steps.map((step, index) => (
+                          {analysis.suggestedOutline.steps.map((step: string, index: number) => (
                             <Typography 
                               key={index} 
                               component="li" 
@@ -197,7 +197,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
                           Key Milestones
                         </Typography>
                         <Box component="ul" sx={{ pl: 2 }}>
-                          {analysis.suggestedOutline.keyMilestones.map((milestone, index) => (
+                          {analysis.suggestedOutline.keyMilestones.map((milestone: string, index: number) => (
                             <Typography 
                               key={index} 
                               component="li" 
@@ -233,7 +233,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
                       Suggested Action Plan
                     </Typography>
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                      {analysis.suggestedSubtasks.map((suggestion, index) => (
+                      {analysis?.suggestedSubtasks.map((suggestion: string, index: number) => (
                         <Chip
                           key={index}
                           label={suggestion}
@@ -326,7 +326,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
                   Steps to Completion
                 </Typography>
                 <Box component="ol" sx={{ pl: 2, mb: 3 }}>
-                  {analysis.suggestedOutline.steps.map((step, index) => (
+                  {analysis.suggestedOutline.steps.map((step: string, index: number) => (
                     <Typography 
                       key={index} 
                       component="li" 
@@ -342,7 +342,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
                   Key Milestones
                 </Typography>
                 <Box component="ul" sx={{ pl: 2 }}>
-                  {analysis.suggestedOutline.keyMilestones.map((milestone, index) => (
+                  {analysis.suggestedOutline.keyMilestones.map((milestone: string, index: number) => (
                     <Typography 
                       key={index} 
                       component="li" 

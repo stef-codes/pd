@@ -15,10 +15,10 @@ const PomodoroTimer: React.FC = () => {
   const [pomodoroCount, setPomodoroCount] = useState(0);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
+    let interval: number | null = null;
 
     if (isActive && time > 0) {
-      interval = setInterval(() => {
+      interval = window.setInterval(() => {
         setTime((time) => time - 1);
       }, 1000);
     } else if (time === 0) {

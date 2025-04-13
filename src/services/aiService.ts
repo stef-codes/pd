@@ -1,9 +1,7 @@
-import { InferenceClient } from "@huggingface/inference";
-
-const apiKey = import.meta.env.VITE_HUGGINGFACE_API_KEY;
+const apiKey = import.meta.env.VITE_HUGGING_FACE_API_KEY;
 console.log('API Key loaded:', apiKey ? 'Yes' : 'No');
 
-const client = new InferenceClient(apiKey);
+const API_URL = 'https://api-inference.huggingface.co/models/meta-llama/Llama-2-7b-chat-hf';
 
 export interface AITaskAnalysis {
   procrastinationLevel: 'low' | 'medium' | 'high';
@@ -57,31 +55,34 @@ Rules:
 IMPORTANT: Return ONLY the JSON object, with no additional text or explanations.`;
 
     console.log('Sending prompt to AI:', prompt);
-    const response = await client.chatCompletion({
-      provider: "cerebras",
-      model: "meta-llama/Llama-4-Scout-17B-16E-Instruct",
-      messages: [
-        {
-          role: "user",
-          content: [
-            {
-              type: "text",
-              text: prompt,
-            },
-          ],
-        },
-      ],
-      max_tokens: 512,
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ inputs: prompt }),
     });
 
-    console.log('AI Response:', response);
-    
-    // Extract the content and try to find valid JSON
-    const content = response.choices[0].message.content;
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log('AI Response:', data);
+
+    if (!data || !Array.isArray(data) || data.length === 0) {
+      throw new Error('Invalid response format from AI');
+    }
+
+    const content = data[0]?.generated_text;
+    if (!content) {
+      throw new Error('No content in AI response');
+    }
+
     const jsonMatch = content.match(/\{[\s\S]*\}/);
-    
     if (!jsonMatch) {
-      throw new Error('No valid JSON found in response');
+      throw new Error('No JSON found in AI response');
     }
 
     const result = JSON.parse(jsonMatch[0]);
