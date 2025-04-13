@@ -7,6 +7,7 @@ export interface Task {
   completedAt?: Date;
   dueDate?: Date;
   subtasks: Subtask[];
+  analysis?: AITaskAnalysis;
 }
 
 export interface Subtask {
