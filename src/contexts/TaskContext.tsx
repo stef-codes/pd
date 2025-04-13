@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Task, Subtask, AITaskAnalysis } from '../types';
-import { differenceInDays } from 'date-fns';
 import { analyzeTask } from '../services/aiService';
 
 interface TaskContextType {
@@ -81,7 +80,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const task = tasks.find(t => t.id === taskId);
     if (!task) throw new Error('Task not found');
 
-    const daysIncomplete = differenceInDays(new Date(), task.createdAt);
+    const daysIncomplete = Math.floor((new Date().getTime() - task.createdAt.getTime()) / (1000 * 60 * 60 * 24));
     const aiAnalysis = await analyzeTask(task);
 
     return {

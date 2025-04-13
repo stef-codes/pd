@@ -63,11 +63,10 @@ const TaskForm = () => {
             <TextField
               fullWidth
               label="Due Date (YYYY-MM-DD)"
-              type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
               variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              placeholder="YYYY-MM-DD"
               sx={{
                 '& .MuiOutlinedInput-root': {
                   '& fieldset': {
