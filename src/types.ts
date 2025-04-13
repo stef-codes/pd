@@ -5,6 +5,7 @@ export interface Task {
   createdAt: Date;
   completed: boolean;
   completedAt?: Date;
+  dueDate?: Date;
   subtasks: Subtask[];
 }
 
