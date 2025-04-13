@@ -6,7 +6,7 @@ import { analyzeTask } from '../services/aiService';
 
 interface TaskContextType {
   tasks: Task[];
-  addTask: (title: string, description: string) => void;
+  addTask: (task: Omit<Task, 'id' | 'createdAt' | 'completed' | 'subtasks'>) => void;
   toggleTask: (id: string) => void;
   addSubtask: (taskId: string, title: string) => void;
   toggleSubtask: (taskId: string, subtaskId: string) => void;
@@ -19,11 +19,10 @@ const TaskContext = createContext<TaskContextType | undefined>(undefined);
 export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  const addTask = useCallback((title: string, description: string) => {
+  const addTask = useCallback((taskData: Omit<Task, 'id' | 'createdAt' | 'completed' | 'subtasks'>) => {
     const newTask: Task = {
       id: uuidv4(),
-      title,
-      description,
+      ...taskData,
       createdAt: new Date(),
       completed: false,
       subtasks: [],
