@@ -4,6 +4,7 @@ import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import PomodoroTimer from './components/PomodoroTimer';
 import { Box, Container, Typography } from '@mui/material';
+import NavBar from './components/NavBar';
 
 const theme = createTheme({
   palette: {
@@ -59,30 +60,33 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <TaskProvider>
-        <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
-          <Container maxWidth="md" sx={{ py: 4 }}>
-            <Typography 
-              variant="h3" 
-              component="h1" 
-              gutterBottom 
-              sx={{ 
-                color: 'primary.main',
-                textAlign: 'center',
-                mb: 4,
-                fontWeight: 'bold',
-                textShadow: '0 0 10px rgba(156, 39, 176, 0.3)'
-              }}
-            >
-              Procrastination Detector
-            </Typography>
-            <Typography variant="subtitle1" align="center" color="text.secondary" paragraph>
-              Break down your tasks and beat procrastination
-            </Typography>
-            <PomodoroTimer />
-            <TaskForm />
-            <TaskList />
-          </Container>
-        </Box>
+        <div className="App">
+          <NavBar />
+          <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+            <Container maxWidth="md" sx={{ py: 4 }}>
+              <Typography 
+                variant="h3" 
+                component="h1" 
+                gutterBottom 
+                sx={{ 
+                  color: 'primary.main',
+                  textAlign: 'center',
+                  mb: 4,
+                  fontWeight: 'bold',
+                  textShadow: '0 0 10px rgba(156, 39, 176, 0.3)'
+                }}
+              >
+                Procrastination Detector
+              </Typography>
+              <Typography variant="subtitle1" align="center" color="text.secondary" paragraph>
+                Break down your tasks and beat procrastination
+              </Typography>
+              <PomodoroTimer />
+              <TaskForm />
+              <TaskList />
+            </Container>
+          </Box>
+        </div>
       </TaskProvider>
     </ThemeProvider>
   );
