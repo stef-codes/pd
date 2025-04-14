@@ -97,6 +97,17 @@ const TaskItem = ({ task }: TaskItemProps) => {
               {task.title}
             </Typography>
           </Box>
+          {!task.analysis && (
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={handleGenerateOutline}
+              sx={{ mb: 1 }}
+            >
+              Generate Task Outline
+            </Button>
+          )}
+
           <IconButton 
             onClick={() => setExpanded(!expanded)}
             sx={{ 
@@ -282,6 +293,24 @@ const TaskItem = ({ task }: TaskItemProps) => {
               )}
             </Box>
 
+            {task.analysis?.suggestedSubtasks && (
+              <Box sx={{ mt: 2 }}>
+                <Typography variant="subtitle2" color="primary" gutterBottom>
+                  Suggested Subtasks
+                </Typography>
+                <List dense>
+                  {task.analysis.suggestedSubtasks.map((subtask, index) => (
+                    <ListItem key={index}>
+                      <ListItemText 
+                        primary={subtask}
+                        primaryTypographyProps={{ variant: 'body2' }}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
+            )}
+
             {!task.analysis && (
               <Button
                 variant="outlined"
@@ -299,4 +328,4 @@ const TaskItem = ({ task }: TaskItemProps) => {
   );
 };
 
-export default TaskItem; 
+export default TaskItem;
